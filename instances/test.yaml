@@ -6,7 +6,6 @@ services:
 
     deploy:
       replicas: 1
-
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.n8n.rule=Host(`test.ghozali.biz.id`)"
@@ -16,11 +15,7 @@ services:
     networks:
       - easypanel
 
-    environment:
-      - N8N_HOST=test.ghozali.biz.id
-      - WEBHOOK_URL=https://test.ghozali.biz.id
-      - N8N_EDITOR_BASE_URL=https://test.ghozali.biz.id
-
 networks:
   easypanel:
     external: true
+    name: easypanel   # 🔥 INI YANG NENTUIN
