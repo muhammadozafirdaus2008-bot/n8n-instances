@@ -1,9 +1,13 @@
+version: "3.8"
+
 services:
-  - name: test
-    image: n8nio/n8n
-    env:
-      N8N_HOST: test.ghozali.biz.id
-      N8N_PROTOCOL: https
-      WEBHOOK_URL: https://test.ghozali.biz.id/
-      N8N_EDITOR_BASE_URL: https://test.ghozali.biz.id/
-      N8N_TRUST_PROXY: true
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n-test
+    restart: always
+    ports:
+      - "5679:5678"
+    environment:
+      - N8N_HOST=test.ghozali.biz.id
+      - WEBHOOK_URL=https://test.ghozali.biz.id
+      - N8N_EDITOR_BASE_URL=https://test.ghozali.biz.id
