@@ -4,18 +4,19 @@ services:
     container_name: n8n-test
     restart: always
 
-  labels:
-  - "traefik.enable=true"
-  - "traefik.http.routers.n8n-test.rule=Host(`test.ghozali.biz.id`)"
-  - "traefik.http.routers.n8n-test.entrypoints=web"
-  - "traefik.http.services.n8n-test.loadbalancer.server.port=5678"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.n8n-test.rule=Host(`test.ghozali.biz.id`)"
+      - "traefik.http.routers.n8n-test.entrypoints=web"
+      - "traefik.http.services.n8n-test.loadbalancer.server.port=5678"
+
     networks:
-      - easypanel   ✅ INI YANG BENAR
+      - easypanel   # WAJIB
 
     environment:
       - N8N_HOST=test.ghozali.biz.id
-      - WEBHOOK_URL=http://test.ghozali.biz.id
-- N8N_EDITOR_BASE_URL=http://test.ghozali.biz.id
+      - WEBHOOK_URL=https://test.ghozali.biz.id
+      - N8N_EDITOR_BASE_URL=https://test.ghozali.biz.id
 
 networks:
   easypanel:
