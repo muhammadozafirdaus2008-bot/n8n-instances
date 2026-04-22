@@ -18,4 +18,4 @@ services:
 networks:
   easypanel:
     external: true
-    name: easypanel   # 🔥 INI YANG NENTUIN
+    name: easypanel  
