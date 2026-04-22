@@ -3,14 +3,14 @@ version: "3.8"
 services:
   n8n:
     image: n8nio/n8n:latest
+
     deploy:
       replicas: 1
-
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.n8n-test.rule=Host(`test.ghozali.biz.id`)"
-      - "traefik.http.routers.n8n-test.entrypoints=web"
-      - "traefik.http.services.n8n-test.loadbalancer.server.port=5678"
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.n8n-test.rule=Host(`test.ghozali.biz.id`)"
+        - "traefik.http.routers.n8n-test.entrypoints=web"
+        - "traefik.http.services.n8n-test.loadbalancer.server.port=5678"
 
     networks:
       - easypanel
