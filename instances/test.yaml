@@ -6,11 +6,12 @@ services:
 
     deploy:
       replicas: 1
+
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.n8n-test.rule=Host(`test.ghozali.biz.id`)"
-        - "traefik.http.routers.n8n-test.entrypoints=web"
-        - "traefik.http.services.n8n-test.loadbalancer.server.port=5678"
+        - "traefik.http.routers.n8n.rule=Host(`test.ghozali.biz.id`)"
+        - "traefik.http.routers.n8n.entrypoints=web"
+        - "traefik.http.services.n8n.loadbalancer.server.port=5678"
 
     networks:
       - easypanel
