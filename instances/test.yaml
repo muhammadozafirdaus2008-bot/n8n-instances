@@ -1,13 +1,24 @@
-version: "3.8"
-
 services:
   n8n:
     image: n8nio/n8n:latest
     container_name: n8n-test
     restart: always
-    ports:
-      - "5679:5678"
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.n8n-test.rule=Host(`test.ghozali.biz.id`)"
+      - "traefik.http.routers.n8n-test.entrypoints=websecure"
+      - "traefik.http.routers.n8n-test.tls=true"
+      - "traefik.http.services.n8n-test.loadbalancer.server.port=5678"
+
+    networks:
+      - easypanel
+
     environment:
       - N8N_HOST=test.ghozali.biz.id
       - WEBHOOK_URL=https://test.ghozali.biz.id
       - N8N_EDITOR_BASE_URL=https://test.ghozali.biz.id
+
+networks:
+  easypanel:
+    external: true
