@@ -1,0 +1,40 @@
+name: Deploy Instances
+
+on:
+  push:
+    paths:
+      - 'instances/*.yaml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 43.134.70.47
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+
+            echo "Masuk ke folder repo..."
+            cd ~/n8n-instances
+
+            echo "Pull terbaru..."
+            git pull origin main
+
+            echo "Deploy semua instances..."
+            for file in instances/*.yaml; do
+              name=$(basename $file .yaml)
+              echo "Deploying $name"
+
+              docker compose -f $file down || true
+              docker compose -f $file up -d
+            done
+
+            echo "Selesai deploy!"
