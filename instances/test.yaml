@@ -7,12 +7,12 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.n8n-test.rule=Host(`test.ghozali.biz.id`)"
-      - "traefik.http.routers.n8n-test.entrypoints=websecure"
-      - "traefik.http.routers.n8n-test.tls=true"
+      - "traefik.http.routers.n8n-test.entrypoints=https"
+      - "traefik.http.routers.n8n-test.tls.certresolver=letsencrypt"
       - "traefik.http.services.n8n-test.loadbalancer.server.port=5678"
 
     networks:
-      - easypanel-n8n
+      - easypanel   ✅ INI YANG BENAR
 
     environment:
       - N8N_HOST=test.ghozali.biz.id
@@ -20,5 +20,5 @@ services:
       - N8N_EDITOR_BASE_URL=https://test.ghozali.biz.id
 
 networks:
-  easypanel-n8n:
+  easypanel:
     external: true
